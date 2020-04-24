@@ -1,0 +1,3 @@
+adb shell am start -n www.weimu.io.silentupdatedemo/.MainActivity
+
+
