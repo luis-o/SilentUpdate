@@ -21,7 +21,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':lib')
+    implementation project(':silentupdate-lib')
     //universal-ui
     implementation deps.core.ui
 }
