@@ -25,7 +25,8 @@ class KotlinDemoActivity : AppCompatActivity() {
 // Check permission step1
     private fun checkPermission() {
         val d = RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE,
+			 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe { granted ->
                     if (granted) getLatestApk()
                 }

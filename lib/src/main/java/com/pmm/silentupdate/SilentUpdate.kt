@@ -17,175 +17,172 @@ import java.io.File
 
 object SilentUpdate {
 
-    //以下数据可配置
-    var downLoadDialogShowAction: DialogShowAction? = null//自定义 下载Dialog -> 流量模式
-    var installDialogShowAction: DialogShowAction? = null//自定义  安装Dialog -> 无线模式,文件已存在
-    var intervalDay = 7//间隔弹窗提示时间-默认7天后提醒-仅仅适用于【isUseDefaultHint=true】
+	//The following data can be configured
+	var downLoadDialogShowAction: DialogShowAction? = null//Custom Download Dialog-> Flow Mode
+	var installDialogShowAction: DialogShowAction? = null//Custom Install Dialog-> Wireless mode, the file already exists
+	var intervalDay = 7//Interval popup reminder time-default reminder after 7 days-only applicable【isUseDefaultHint=true】
 
-    private val mobileUpdateStrategy by lazy { MobileUpdateStrategy() }
-    private val wifiUpdateStrategy by lazy { WifiUpdateStrategy() }
+	private val mobileUpdateStrategy by lazy { MobileUpdateStrategy() }
+	private val wifiUpdateStrategy by lazy { WifiUpdateStrategy() }
 
-    /**
-     * 静默更新的初始化
-     * @param App的上下文
-     */
-    fun init(context: Application) {
-        //上下文初始化
-        ContextCenter.init(context)
-        //增加通知频道【兼容8.0】
-        val channelName = context.getString(R.string.module_silentupdate_channelName)
-        createNotificationChannel(
-                context = context,
-                channelId = Const.NOTIFICATION_CHANNEL_ID,
-                channelName = channelName,
-                channelDesc = channelName
-        )
-    }
+	/**
+	 * Initialization of silent update
+      	 * @param App context
+	 */
+	fun init(context: Application) {
+		//Context initialization
+		ContextCenter.init(context)
+		//Add notification channel [compatible with 8.0]
+		val channelName = context.getString(R.string.module_silentupdate_channelName)
+		createNotificationChannel(
+				context = context,
+				channelId = Const.NOTIFICATION_CHANNEL_ID,
+				channelName = channelName,
+				channelDesc = channelName
+		)
+	}
 
-    /**
-     * 增加通知栏的频道 通用库更新后可删除
-     * @param importance NotificationManager.IMPORTANCE_LOW
-     */
-    private fun createNotificationChannel(
-            context: Context,
-            channelId: String,
-            channelName: String,
-            channelDesc: String = "",
-            importance: Int = 0,
-            enableVibration: Boolean = true,
-            lightColor: Int = Color.GREEN
-    ) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            // channelId 通知渠道的id
-            // channelName 用户可以看到的通知渠道的名字.
-            // importance 用户可以看到的通知渠道的描述
-            val mChannel = NotificationChannel(channelId, channelName, importance)
-            // 配置通知渠道的属性
-            mChannel.description = channelDesc
-            // 设置通知出现时的闪灯（如果 android 设备支持的话）
-            mChannel.enableLights(true)
-            mChannel.lightColor = lightColor
-            // 设置通知出现时的震动（如果 android 设备支持的话）
-            mChannel.enableVibration(enableVibration)
-            //mChannel.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
-            //最后在NotificationManager中创建该通知渠道
-            mNotificationManager.createNotificationChannel(mChannel)
-        }
-    }
-
-
-    /**
-     * 更新操作
-     * - 流量模式
-     * - WIFI模式
-     * @param apkUrl app的下载地址
-     * @param latestVersion 最新的版本号
-     */
-    fun update(receive: UpdateInfo.() -> Unit) {
-        val updateInfo = UpdateInfo()
-        updateInfo.receive()
-        val apkUrl = updateInfo.apkUrl
-        val latestVersion = updateInfo.latestVersion
-        if (apkUrl.isBlank() or latestVersion.isBlank()) return
-        SPCenter.modifyUpdateInfo(updateInfo)
-
-        val context = ContextCenter.getAppContext()
-
-        //策略模式
-        val strategy: UpdateStrategy = when {
-            //WIFI
-            isConnectWifi(context) -> wifiUpdateStrategy
-            //流量
-            else -> mobileUpdateStrategy
-        }
-        strategy.update(apkUrl, latestVersion)
-    }
-
-    //是否连接Wifi
-    private fun isConnectWifi(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-        if (networkInfo != null && networkInfo.isConnected) {
-            val type = networkInfo.type
-            if (type == ConnectivityManager.TYPE_WIFI) {
-                return true
-            }
-        }
-        return false
-    }
-
-    /**
-     * 主动更新 同流量模式
-     * 检查本地文件，有直接显示下载弹窗
-     */
-    fun activeUpdate(receive: UpdateInfo.() -> Unit) {
-        val updateInfo = UpdateInfo()
-        updateInfo.receive()
-        val apkUrl = updateInfo.apkUrl
-        val latestVersion = updateInfo.latestVersion
-        if (apkUrl.isBlank() or latestVersion.isBlank()) return
-        SPCenter.modifyUpdateInfo(updateInfo)
-
-        //策略模式
-        mobileUpdateStrategy.update(apkUrl, latestVersion)
-    }
+	/**
+	 * Channels with added notification bar can be deleted after the general library is updated
+	 * @param importance NotificationManager.IMPORTANCE_LOW
+	 */
+	private fun createNotificationChannel(
+			context: Context,
+			channelId: String,
+			channelName: String,
+			channelDesc: String = "",
+			importance: Int = 0,
+			enableVibration: Boolean = true,
+			lightColor: Int = Color.GREEN
+	) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			val mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+			// channelId > Notification channel id
+			// channelName > The name of the notification channel that the user can see.
+			// importance > Description of notification channels that users can see
+			val mChannel = NotificationChannel(channelId, channelName, importance)
+			// Configure notification channel properties
+			mChannel.description = channelDesc
+			// Set the flashing light when the notification appears (if the android device supports it)
+			mChannel.enableLights(true)
+			mChannel.lightColor = lightColor
+			// Set vibration when notification appears (if supported by android device)
+			mChannel.enableVibration(enableVibration)
+			//mChannel.vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+			//Finally, create the notification channel in NotificationManager
+			mNotificationManager.createNotificationChannel(mChannel)
+		}
+	}
 
 
-    /**
-     * 清除sp缓存数据
-     */
-    fun clearCache() {
-        SPCenter.clearDownloadTaskId()
-        SPCenter.clearDialogTime()
-        SPCenter.clearUpdateInfo()
-    }
+	/**
+	 * Update operation
+	 *-Flow mode
+	 *-WIFI mode
+	 * @param apkUrl app download address
+	 * @param latestVersion The latest version number
+	 */
+	fun update(receive: UpdateInfo.() -> Unit) {
+		val updateInfo = UpdateInfo()
+		updateInfo.receive()
+		val apkUrl = updateInfo.apkUrl
+		val latestVersion = updateInfo.latestVersion
+		if (apkUrl.isBlank() or latestVersion.isBlank()) return
+		SPCenter.modifyUpdateInfo(updateInfo)
 
-    /**
-     * 删除apk 手动删除 已安装的apk
-     * @param version 版本
-     */
-    fun deleteApk(version: String): Boolean {
-        val context = ContextCenter.getAppContext()
-        val path = "${Const.UPDATE_FILE_DIR}${context.getAppName()}_v$version.apk"
-        return deleteFile(path)
-    }
+		val context = ContextCenter.getAppContext()
+
+		//Strategy Mode
+
+		val strategy: UpdateStrategy = when {
+			//WIFI
+			isConnectWifi(context) -> wifiUpdateStrategy
+			else -> mobileUpdateStrategy
+		}
+		strategy.update(apkUrl, latestVersion)
+	}
+
+	//Whether to connect to Wifi
+	private fun isConnectWifi(context: Context): Boolean {
+		val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+		val networkInfo = cm.activeNetworkInfo
+		if (networkInfo != null && networkInfo.isConnected) {
+			val type = networkInfo.type
+			if (type == ConnectivityManager.TYPE_WIFI) {
+				return true
+			}
+		}
+		return false
+	}
+
+	/**
+	 * Active update Same flow mode
+	 * Check local files, there is a download popup window
+	 */
+
+	fun activeUpdate(receive: UpdateInfo.() -> Unit) {
+		val updateInfo = UpdateInfo()
+		updateInfo.receive()
+		val apkUrl = updateInfo.apkUrl
+		val latestVersion = updateInfo.latestVersion
+		if (apkUrl.isBlank() or latestVersion.isBlank()) return
+		SPCenter.modifyUpdateInfo(updateInfo)
+
+		//Strategy Mode
+		mobileUpdateStrategy.update(apkUrl, latestVersion)
+	}
 
 
-    /**
-     * delete file or directory
-     * 删除文件或目录
-     *
-     * if path is null or empty, return true
-     * if path not exist, return true
-     * if path exist, delete recursion. return true
-     *
-     *
-     * @param path 文件路径
-     * @return 是否删除成功
-     */
-    private fun deleteFile(path: String): Boolean {
-        if (TextUtils.isEmpty(path))
-            return true
-        val file = File(path)
-        if (!file.exists())
-            return true
-        if (file.isFile)
-            return file.delete()
+	/**
+	 * Clear sp cached data
+	 */
+	fun clearCache() {
+		SPCenter.clearDownloadTaskId()
+		SPCenter.clearDialogTime()
+		SPCenter.clearUpdateInfo()
+	}
 
-        if (!file.isDirectory)
-            return false
+	/**
+	 * Delete apk Manually delete the installed apk
+	 * @param version
+	 */
+	fun deleteApk(version: String): Boolean {
+		val context = ContextCenter.getAppContext()
+		val path = "${Const.UPDATE_FILE_DIR}${context.getAppName()}_v$version.apk"
+		return deleteFile(path)
+	}
 
-        for (f in file.listFiles()) {
-            if (f.isFile) {
-                f.delete()
-            } else if (f.isDirectory) {
-                deleteFile(f.absolutePath)
-            }
-        }
-        return file.delete()
-    }
+
+	/**
+	 * delete file or directory
+	 *
+	 * if path is null or empty, return true
+	 * if path not exist, return true
+	 * if path exist, delete recursion. return true
+	 *
+	 *
+	 * @param path file path
+	 * @return Whether the deletion was successful
+	 */
+	private fun deleteFile(path: String): Boolean {
+		if (TextUtils.isEmpty(path))
+			return true
+		val file = File(path)
+		if (!file.exists())
+			return true
+		if (file.isFile)
+			return file.delete()
+
+		if (!file.isDirectory)
+			return false
+
+		for (f in file.listFiles()) {
+			if (f.isFile) {
+				f.delete()
+			} else if (f.isDirectory) {
+				deleteFile(f.absolutePath)
+			}
+		}
+		return file.delete()
+	}
 }
-
-
-

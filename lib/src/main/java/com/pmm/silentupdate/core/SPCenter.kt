@@ -4,71 +4,64 @@ import android.content.Context
 import com.google.gson.Gson
 import com.pmm.silentupdate.BuildConfig
 
-/**
- * Author:你需要一台永动机
- * Date:2018/4/13 09:44
- * Description:存储文件的时间
- */
 internal object SPCenter {
-    private val sp by lazy { ContextCenter.getAppContext().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE) }
-    private val mGson by lazy { Gson() }
+	private val sp by lazy { ContextCenter.getAppContext().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE) }
+	private val mGson by lazy { Gson() }
 
+	/**
+      * Corresponding to downloadManager
+      * Whether downloading task ID
+      */
+	private val DOWNLOAD_TASK_ID = "download_task_id"
 
-    /**
-     * 对应downloadManager
-     * 是否正在下载 任务ID
-     */
-    private val DOWNLOAD_TASK_ID = "download_task_id"
+	internal fun clearDownloadTaskId() {
+		sp.edit().remove(DOWNLOAD_TASK_ID).apply()
+	}
 
-    internal fun clearDownloadTaskId() {
-        sp.edit().remove(DOWNLOAD_TASK_ID).apply()
-    }
+	internal fun setDownloadTaskId(apkTaskID: Long) {
+		sp.edit().putLong(DOWNLOAD_TASK_ID, apkTaskID).apply()
+	}
 
-    internal fun setDownloadTaskId(apkTaskID: Long) {
-        sp.edit().putLong(DOWNLOAD_TASK_ID, apkTaskID).apply()
-    }
+	internal fun getDownloadTaskId(): Long {
+		return sp.getLong(DOWNLOAD_TASK_ID, -1L)
+	}
 
-    internal fun getDownloadTaskId(): Long {
-        return sp.getLong(DOWNLOAD_TASK_ID, -1L)
-    }
+	/**
+	 * Dialog display interval
+	 */
+	private val DIALOG_TIME = "dialogTime"
 
-    /**
-     * Dialog的显示时间间隔
-     */
-    private val DIALOG_TIME = "dialogTime"
+	//Get storage time
+	fun getDialogTime(): Long {
+		return sp.getLong(DIALOG_TIME, 0L)
+	}
 
-    //获取存储时间
-    fun getDialogTime(): Long {
-        return sp.getLong(DIALOG_TIME, 0L)
-    }
+	//Modify storage time
+	fun modifyDialogTime(storeTime: Long) {
+		sp.edit().putLong(DIALOG_TIME, storeTime).apply()
+	}
 
-    //修改存储时间
-    fun modifyDialogTime(storeTime: Long) {
-        sp.edit().putLong(DIALOG_TIME, storeTime).apply()
-    }
+	//Clear storage time
+	fun clearDialogTime() {
+		sp.edit().remove(DIALOG_TIME).apply()
+	}
 
-    //清除存储时间
-    fun clearDialogTime() {
-        sp.edit().remove(DIALOG_TIME).apply()
-    }
+	/**
+	 * Updated content
+	 */
+	private val UPDATE_INFO = "updateInfo"
 
-    /**
-     * 更新的内容
-     */
-    private val UPDATE_INFO = "updateInfo"
+	//Get updates
+	fun getUpdateInfo(): UpdateInfo = mGson.fromJson(sp.getString(UPDATE_INFO, "") as String,UpdateInfo::class.java)
 
-    //获取更新内容
-    fun getUpdateInfo(): UpdateInfo = mGson.fromJson(sp.getString(UPDATE_INFO, "") as String,UpdateInfo::class.java)
+	//Modify the update
+	fun modifyUpdateInfo(updateInfo: UpdateInfo) {
+		sp.edit().putString(UPDATE_INFO, mGson.toJson(updateInfo)).apply()
+	}
 
-    //修改更新内容
-    fun modifyUpdateInfo(updateInfo: UpdateInfo) {
-        sp.edit().putString(UPDATE_INFO, mGson.toJson(updateInfo)).apply()
-    }
-
-    //清除更新内容
-    fun clearUpdateInfo() {
-        sp.edit().remove(UPDATE_INFO).apply()
-    }
-
+	//Clear updates
+	fun clearUpdateInfo() {
+		sp.edit().remove(UPDATE_INFO).apply()
+	}
 
 }

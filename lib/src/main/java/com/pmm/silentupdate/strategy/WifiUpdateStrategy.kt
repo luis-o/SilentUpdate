@@ -4,60 +4,60 @@ import com.pmm.silentupdate.core.*
 import java.io.File
 
 /**
- * Wifi的情况
+ * Wifi situation
  */
 internal class WifiUpdateStrategy : UpdateStrategy {
 
-    init {
-        //下载完成后
-        DownLoadCenter.onDownloadComplete = {
-            //todo 锤子，努比亚 会出现不弹窗问题
-            val activity = ContextCenter.getTopActivity()
-            activity.showInstallNotification(it)//更新Notification
-            activity.showInstallDialog(it)//显示安装弹窗
-        }
-    }
+	init {
+		//After the download is complete
+		DownLoadCenter.onDownloadComplete = {
+			// todo hammer, Nubia will not pop up
+			val activity = ContextCenter.getTopActivity()
+			activity.showInstallNotification(it)//Update Notification
+			activity.showInstallDialog(it)//Show installation popup
+		}
+	}
 
 
-    //升级操作 WIFI的情况下
-    override fun update(apkUrl: String, latestVersion: String) {
-        try {
-            apkUrl.checkUpdateUrl()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return
-        }
+	//In case of upgrade operation WIFI
+	override fun update(apkUrl: String, latestVersion: String) {
+	try {
+		apkUrl.checkUpdateUrl()
+	} catch (e: Exception) {
+		e.printStackTrace()
+		return
+	}
 
-        val context = ContextCenter.getAppContext()
-        val activity = ContextCenter.getTopActivity()
-        val fileName = "${context.getAppName()}_v$latestVersion.apk"
-        val path = Const.UPDATE_FILE_DIR + fileName
+	val context = ContextCenter.getAppContext()
+	val activity = ContextCenter.getTopActivity()
+	val fileName = "${context.getAppName()}_v$latestVersion.apk"
+	val path = Const.UPDATE_FILE_DIR + fileName
 
-        val taskId = SPCenter.getDownloadTaskId()
-        loge("==============")
-        loge("taskID=$taskId")
-        if (File(path).isFileExist()) {
-            loge("【文件已经存在】")
-            if (DownLoadCenter.isDownTaskSuccess(taskId)) {
-                loge("任务已经下载完成")
-                //状态：完成
-                activity.showInstallDialog(File(path)) //弹出dialog
-            } else if (DownLoadCenter.isDownTaskPause(taskId)) {
-                loge("任务已经暂停")
-                //启动下载
-                loge("继续下载")
-                DownLoadCenter.addRequest(apkUrl, fileName, false)
-            } else if (DownLoadCenter.isDownTaskProcessing(taskId)) {
-                loge("任务正在执行当中")
-            } else {
-                activity.showInstallDialog(File(path)) //弹出dialog
-            }
-        } else {
-            loge("开始下载")
-            //不存在 直接下载
-            DownLoadCenter.addRequest(apkUrl, fileName)
-        }
-    }
+	val taskId = SPCenter.getDownloadTaskId()
+	loge("==============")
+	loge("taskID=$taskId")
+	if (File(path).isFileExist()) {
+		loge("【This file already exists】")
+		if (DownLoadCenter.isDownTaskSuccess(taskId)) {
+		loge("The task has been downloaded")
+		// Status: complete
+		activity.showInstallDialog(File(path)) //Pop up dialog
+		} else if (DownLoadCenter.isDownTaskPause(taskId)) {
+		loge("The task has been suspended")
+		//// Start download
+		loge("Continue download")
+		DownLoadCenter.addRequest(apkUrl, fileName, false)
+		} else if (DownLoadCenter.isDownTaskProcessing(taskId)) {
+		loge("The task is being executed")
+		} else {
+		activity.showInstallDialog(File(path)) //Pop up dialog
+		}
+	} else {
+		loge("start download")
+		// There is no direct download
+		DownLoadCenter.addRequest(apkUrl, fileName)
+	}
+	}
 
 
 }

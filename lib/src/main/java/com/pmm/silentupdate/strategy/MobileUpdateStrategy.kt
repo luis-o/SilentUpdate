@@ -6,23 +6,23 @@ import java.io.File
 
 
 /**
- * 流量的情况
+ * Traffic situation
  */
 internal class MobileUpdateStrategy : UpdateStrategy {
 
     init {
-        //下载完成后
+        //After the download is complete
         DownLoadCenter.onDownloadComplete = {
             Handler().postDelayed({
                 val activity = ContextCenter.getTopActivity()
-                activity.showInstallDialog(it)//显示安装弹窗
+                activity.showInstallDialog(it)//Show installation popup
                 ContextCenter.getAppContext().openApkByFilePath(it)
             }, 200)
         }
     }
 
 
-    //升级操作 流量的情况下
+    //Upgrade operation in the case of traffic
     override fun update(apkUrl: String, latestVersion: String) {
         try {
             apkUrl.checkUpdateUrl()
@@ -39,23 +39,23 @@ internal class MobileUpdateStrategy : UpdateStrategy {
         loge("==============")
         loge("taskID=$taskId")
         if (File(path).isFileExist()) {
-            loge("文件已经存在")
+            loge("This file already exists")
             if (DownLoadCenter.isDownTaskSuccess(taskId)) {
-                loge("任务已经下载完成")
-                activity.showInstallDialog(File(path)) //弹出dialog
+                loge("The task has been downloaded")
+                activity.showInstallDialog(File(path)) //pop up dialog
             } else if (DownLoadCenter.isDownTaskPause(taskId)) {
-                loge("任务已经暂停")
-                //启动下载
-                loge("继续下载")
+                loge("The task has been suspended")
+                //Start download
+                loge("Continue download")
                 DownLoadCenter.addRequest(apkUrl, fileName, true)
             } else if (DownLoadCenter.isDownTaskProcessing(taskId)) {
-                loge("任务正在执行当中")
+                loge("The task is being executed")
             } else {
-                activity.showInstallDialog(File(path)) //弹出dialog
+                activity.showInstallDialog(File(path)) //pop dialog
             }
         } else {
-            loge("显示 下载弹窗")
-            activity.showDownloadDialog(apkUrl, fileName)//显示 下载弹窗
+            loge("Show download popup")
+            activity.showDownloadDialog(apkUrl, fileName)//Show download popup
         }
     }
 

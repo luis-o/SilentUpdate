@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 // JitPack Maven
 apply plugin: 'com.github.dcendents.android-maven'
 // Your Group
-group='com.github.caoyanglee'
+group='com.github.luis-o'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -37,8 +37,3 @@ dependencies {
 }
 //记得加上这个
 //apply from: "bintrayUpload.gradle"
-
-
-
-
-
