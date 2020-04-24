@@ -55,7 +55,7 @@ internal class MobileUpdateStrategy : UpdateStrategy {
             }
         } else {
             loge("Show download popup")
-            activity.showDownloadDialog(apkUrl, fileName)//Show download popup
+            activity.showDownloadDialog(apkUrl, fileName) //Show download popup
         }
     }
 

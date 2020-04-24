@@ -41,6 +41,7 @@ class KotlinDemoActivity : AppCompatActivity() {
     private fun getLatestApk() {
         //Specific network request steps
         val d = Observable.just(CheckVersionResultPO(
+                //apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
                 apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())

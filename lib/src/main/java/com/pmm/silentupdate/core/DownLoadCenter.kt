@@ -20,7 +20,7 @@ internal object DownLoadCenter {
 	internal fun addRequest(apkUrl: String, fileName: String?, isMobileMode: Boolean = false) {
 		bindReceiver() //Bind broadcast receiver
 		val uri = Uri.parse(apkUrl)
-		loge("url=$apkUrl")
+		loge("apkurl=$apkUrl")
 		loge("uri=$uri")
 		val request = DownloadManager.Request(uri)
 		//Set under what network conditions to download
@@ -103,7 +103,6 @@ internal object DownLoadCenter {
 		}
 	}
 
-
 	// Find the corresponding file address by downloading id
    @Deprecated ("Query the status of download tasks")
 	private fun queryDownTaskById(id: Long): String? {
@@ -126,7 +125,6 @@ internal object DownLoadCenter {
 		cursor.close()
 		return filePath
 	}
-
 
 	//Bound broadcast receiver
 	private fun bindReceiver() {
