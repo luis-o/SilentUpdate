@@ -13,9 +13,9 @@ class AppData : OriginAppData() {
 
     override fun onCreate() {
         super.onCreate()
-	// Initialize step01
+	    // Initialize step01
         SilentUpdate.init(this)
-	/// Interval pop-up window reminding time-default reminder after 7 days
+	    // Interval pop-up window reminding time-default reminder after 7 days
         SilentUpdate.intervalDay = 7
         // Download reminder-> flow mode
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {

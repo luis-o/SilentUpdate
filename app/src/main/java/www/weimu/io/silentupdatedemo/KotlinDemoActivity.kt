@@ -2,6 +2,7 @@ package www.weimu.io.silentupdatedemo
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -21,10 +22,9 @@ class KotlinDemoActivity : AppCompatActivity() {
         checkPermission()
     }
 
-
-// Check permission step1
+    // Check permission step1
     private fun checkPermission() {
-        val d = RxPermissions(this)
+        RxPermissions(this)
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE,
 			 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe { granted ->
@@ -37,19 +37,19 @@ class KotlinDemoActivity : AppCompatActivity() {
             val latestVersion: String
     ) : Serializable
 
-    //Get download link step2
+    // Get download link step2
     private fun getLatestApk() {
         //Specific network request steps
-        val d = Observable.just(CheckVersionResultPO(
+        Observable.just(CheckVersionResultPO(
                 //apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
-                apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
+                apkUrl = "https://github.com/luis-o/SilentUpdate/blob/master/deploy/sword.apk",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())
                 .subscribe {
                     //Determine the version number
                     if (it.latestVersion > BuildConfig.VERSION_NAME) {
                         Toast.makeText(this@KotlinDemoActivity, "Starting download...", Toast.LENGTH_SHORT).show()
-
+                        Log.e("swordupdate", "downloading this ->" + it.apkUrl)
                         SilentUpdate.update {
                             this.apkUrl = it.apkUrl
                             this.latestVersion = it.latestVersion
@@ -60,6 +60,4 @@ class KotlinDemoActivity : AppCompatActivity() {
                     }
                 }
     }
-
-
 }
