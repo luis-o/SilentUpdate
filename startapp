@@ -1,3 +1,3 @@
 adb shell am start -n www.weimu.io.silentupdatedemo/.MainActivity
-
+adb push /home/luis/Projects/SWORD/SilentUpdate/app/build/outputs/apk/debug/app-debug.apk /storage/emulated/0/Download/sword_v1.1.2.apk
 
