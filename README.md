@@ -126,7 +126,7 @@ SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
     override fun show(context: ContextWrapper, updateContent: String, positiveClick: () -> Unit, negativeClick: () -> Unit) {
         AlertDialog.Builder(context)
                 .setCancelable(false)
-                .setTitle("提示")
+                .setTitle("prompt")
                 .setMessage("Download prompt popup custom $ updateContent")
                 .setPositiveButton("update immediately") { dialog, which -> positiveClick() }
                 .setNegativeButton("Later") { dialog, which -> negativeClick() }
