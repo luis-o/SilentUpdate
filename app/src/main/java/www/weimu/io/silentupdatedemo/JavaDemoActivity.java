@@ -17,7 +17,7 @@ import kotlin.jvm.functions.Function1;
 import com.pmm.silentupdate.SilentUpdate;
 
 /**
- * Java的调用方式
+ * Java calling method
  */
 public class JavaDemoActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class JavaDemoActivity extends AppCompatActivity {
 
     }
 
-    //检查权限 step1
+    // Check permission step1
     private void checkPermission() {
         Disposable d = new RxPermissions(this)
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -44,24 +44,24 @@ public class JavaDemoActivity extends AppCompatActivity {
     }
 
 
-    //获取下载链接 step2
+    // Get download link step2
     public void getLatestApk() {
-        //具体的网络请求步骤自己操作
+        //Specific network request steps
         final String apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk";
-        //判断版本号
+        //Determine the version number
         final String latestVersion = "1.2.1";
         String currentVersion = BuildConfig.VERSION_NAME;
 
-        //将服务器传给你的最新版本号字段给latestVersion
+        //The latest version number field passed to you by the server to latestVersion
         if (latestVersion.compareTo(currentVersion) > 0) {
-            Toast.makeText(JavaDemoActivity.this, "开始下载中...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JavaDemoActivity.this, "Starting download...", Toast.LENGTH_SHORT).show();
             SilentUpdate.INSTANCE.update(new Function1<UpdateInfo, Unit>() {
                 @Override
                 public Unit invoke(UpdateInfo updateInfo) {
                     updateInfo.setApkUrl(apkUrl);
                     updateInfo.setLatestVersion(latestVersion);
-                    updateInfo.setTitle("这是自定义的标题");
-                    updateInfo.setMsg("这是自定义的内容");
+                    updateInfo.setTitle("This is a custom title");
+                    updateInfo.setMsg("This is custom content");
                     updateInfo.setForce(false);
                     updateInfo.setExtra(new Bundle());
                     return Unit.INSTANCE;

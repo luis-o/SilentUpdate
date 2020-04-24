@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <!-- external-path:sd ；path:你的应用保存文件的根目录；name随便定义-->
+
+<!-- external-path: sd; path: the root directory of your application to save the file; name is freely defined -->
     <external-path
         name="external_storage_root"
         path="." />

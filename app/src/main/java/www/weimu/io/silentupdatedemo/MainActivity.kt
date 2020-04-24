@@ -7,10 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import com.pmm.silentupdate.SilentUpdate
 
-
-/**
- * kotlin的调用方法
- */
 class MainActivity : AppCompatActivity() {
 
 
@@ -28,14 +24,14 @@ class MainActivity : AppCompatActivity() {
         //clear cache
         btnClearCache.setOnClickListener {
             SilentUpdate.clearCache()
-            toast("清除缓存成功")
+            toast("Successfully cleared the cache")
         }
         //delete apk
         btnDeleteApk.setOnClickListener {
             if (SilentUpdate.deleteApk(version = "1.1.1"))
-                toast("删除成功")
+                toast("successfully deleted")
             else
-                toast("删除失败")
+                toast("failed to delete")
         }
     }
 

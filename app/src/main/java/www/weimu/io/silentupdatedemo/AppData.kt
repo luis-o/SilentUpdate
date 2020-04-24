@@ -8,29 +8,24 @@ import com.pmm.silentupdate.core.DialogShowAction
 import com.pmm.silentupdate.core.UpdateInfo
 import com.pmm.ui.OriginAppData
 
-/**
- * Author:你需要一台永动机
- * Date:2018/1/17 13:59
- * Description:
- */
 class AppData : OriginAppData() {
     override fun isDebug(): Boolean = BuildConfig.DEBUG
 
     override fun onCreate() {
         super.onCreate()
-        //初始化 step01
+	// Initialize step01
         SilentUpdate.init(this)
-        ///间隔弹窗提示时间- 默认7天后提醒
+	/// Interval pop-up window reminding time-default reminder after 7 days
         SilentUpdate.intervalDay = 7
-        //下载提示 -> 流量模式
+        // Download reminder-> flow mode
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {
                 val dialog = AlertDialog.Builder(context)
                         .setCancelable(!updateInfo.isForce)
                         .setTitle(updateInfo.title)
-                        .setMessage("下载提示弹窗 自定义 ${updateInfo.msg}")
-                        .setPositiveButton("立即更新", null)
-                        .setNegativeButton("稍后", null)
+                        .setMessage("Download prompt popup custom ${updateInfo.msg}")
+                        .setPositiveButton("update immediately", null)
+                        .setNegativeButton("Later", null)
                         .create()
                 dialog.setOnShowListener {
                     //positive
@@ -54,15 +49,16 @@ class AppData : OriginAppData() {
             }
 
         }
-        //安装提示 -> 无线模式，文件已存在
+
+// Installation prompt-> wireless mode, the file already exists
         SilentUpdate.installDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {
                 val dialog = AlertDialog.Builder(context)
                         .setCancelable(!updateInfo.isForce)
                         .setTitle(updateInfo.title)
-                        .setMessage("安装提示弹窗 自定义 ${updateInfo.msg}")
-                        .setPositiveButton("立即安装", null)
-                        .setNegativeButton("稍后", null)
+                        .setMessage("Installation prompt popup customization ${updateInfo.msg}")
+                        .setPositiveButton("install now", null)
+                        .setNegativeButton("Later", null)
                         .create()
                 dialog.setOnShowListener {
                     //positive

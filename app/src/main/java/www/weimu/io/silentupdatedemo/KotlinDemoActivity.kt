@@ -11,7 +11,7 @@ import io.reactivex.Observable
 import java.io.Serializable
 
 /**
- * kotlin的调用方式
+ *How to call kotlin
  */
 class KotlinDemoActivity : AppCompatActivity() {
 
@@ -21,7 +21,8 @@ class KotlinDemoActivity : AppCompatActivity() {
         checkPermission()
     }
 
-    //检查权限 step1
+
+// Check permission step1
     private fun checkPermission() {
         val d = RxPermissions(this)
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -35,22 +36,22 @@ class KotlinDemoActivity : AppCompatActivity() {
             val latestVersion: String
     ) : Serializable
 
-    //获取下载链接 step2
+    //Get download link step2
     private fun getLatestApk() {
-        //具体的网络请求步骤自己操作
+        //Specific network request steps
         val d = Observable.just(CheckVersionResultPO(
                 apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())
                 .subscribe {
-                    //判断版本号
+                    //Determine the version number
                     if (it.latestVersion > BuildConfig.VERSION_NAME) {
-                        Toast.makeText(this@KotlinDemoActivity, "开始下载中...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@KotlinDemoActivity, "Starting download...", Toast.LENGTH_SHORT).show()
 
                         SilentUpdate.update {
                             this.apkUrl = it.apkUrl
                             this.latestVersion = it.latestVersion
-                            this.msg = "1.bug修复"
+                            this.msg = "1.bug fix"
                             this.isForce = false
                             this.extra = Bundle()
                         }
