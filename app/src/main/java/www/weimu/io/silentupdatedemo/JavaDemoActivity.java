@@ -45,6 +45,7 @@ public class JavaDemoActivity extends AppCompatActivity {
     public void getLatestApk() {
         //Specific network request steps
         final String apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk";
+        
         //Determine the version number
         final String latestVersion = "1.2.1";
         String currentVersion = BuildConfig.VERSION_NAME;
