@@ -100,8 +100,8 @@ extra: carry more data through extra <br>
 SilentUpdate.update {
     this.apkUrl = it.apkUrl
     this.latestVersion = it.latestVersion
-    this.title ="这是自定义的标题"
-    this.msg = "这是自定义的消息"
+    this.title = "This is a custom title"
+    this.msg = "This is a custom message"
     this.isForce = true
     this.extra = Bundle()
 }
