@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.pmm.silentupdate.core.UpdateInfo;
+import pt.mobilesword.silentupdate.SilentUpdate;
+import pt.mobilesword.silentupdate.core.UpdateInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-
-import com.pmm.silentupdate.SilentUpdate;
 
 /**
  * Java calling method

@@ -1,4 +1,4 @@
-package com.pmm.silentupdate.core
+package pt.mobilesword.silentupdate.core
 
 import android.app.Activity
 import android.app.Application

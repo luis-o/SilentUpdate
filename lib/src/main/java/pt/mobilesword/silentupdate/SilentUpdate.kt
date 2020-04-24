@@ -1,4 +1,4 @@
-package com.pmm.silentupdate
+package pt.mobilesword.silentupdate
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -8,12 +8,12 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
 import android.text.TextUtils
-import com.pmm.silentupdate.core.*
-import com.pmm.silentupdate.strategy.MobileUpdateStrategy
-import com.pmm.silentupdate.strategy.UpdateStrategy
-import com.pmm.silentupdate.strategy.WifiUpdateStrategy
+import pt.mobilesword.silentupdate.core.*
+import pt.mobilesword.silentupdate.strategy.MobileUpdateStrategy
+import pt.mobilesword.silentupdate.strategy.UpdateStrategy
+import pt.mobilesword.silentupdate.strategy.WifiUpdateStrategy
+import pt.mobilesword.silentupdate.R
 import java.io.File
-
 
 object SilentUpdate {
 

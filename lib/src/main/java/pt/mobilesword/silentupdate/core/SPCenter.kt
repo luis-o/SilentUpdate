@@ -1,8 +1,8 @@
-package com.pmm.silentupdate.core
+package pt.mobilesword.silentupdate.core
 
 import android.content.Context
 import com.google.gson.Gson
-import com.pmm.silentupdate.BuildConfig
+import pt.mobilesword.silentupdate.BuildConfig
 
 internal object SPCenter {
 	private val sp by lazy { ContextCenter.getAppContext().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE) }

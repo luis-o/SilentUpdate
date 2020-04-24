@@ -3,9 +3,9 @@ package www.weimu.io.silentupdatedemo
 import android.app.AlertDialog
 import android.content.ContextWrapper
 import android.view.View
-import com.pmm.silentupdate.SilentUpdate
-import com.pmm.silentupdate.core.DialogShowAction
-import com.pmm.silentupdate.core.UpdateInfo
+import pt.mobilesword.silentupdate.SilentUpdate
+import pt.mobilesword.silentupdate.core.DialogShowAction
+import pt.mobilesword.silentupdate.core.UpdateInfo
 import com.pmm.ui.OriginAppData
 
 class AppData : OriginAppData() {

@@ -1,7 +1,7 @@
-package com.pmm.silentupdate.core
+package pt.mobilesword.silentupdate.core
 
 import android.os.Bundle
-import com.pmm.silentupdate.R
+import pt.mobilesword.silentupdate.R
 import java.io.Serializable
 
 class UpdateInfo : Serializable {

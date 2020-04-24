@@ -1,4 +1,4 @@
-package com.pmm.silentupdate.core
+package pt.mobilesword.silentupdate.core
 
 import android.app.*
 import android.content.Context
@@ -13,9 +13,9 @@ import android.util.Log
 import android.view.View
 import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
-import com.pmm.silentupdate.BuildConfig
-import com.pmm.silentupdate.R
-import com.pmm.silentupdate.SilentUpdate
+import pt.mobilesword.silentupdate.BuildConfig
+import pt.mobilesword.silentupdate.R
+import pt.mobilesword.silentupdate.SilentUpdate
 import java.io.File
 import java.util.*
 

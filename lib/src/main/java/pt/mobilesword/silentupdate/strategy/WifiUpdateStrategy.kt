@@ -1,6 +1,6 @@
-package com.pmm.silentupdate.strategy
+package pt.mobilesword.silentupdate.strategy
 
-import com.pmm.silentupdate.core.*
+import pt.mobilesword.silentupdate.core.*
 import java.io.File
 
 /**

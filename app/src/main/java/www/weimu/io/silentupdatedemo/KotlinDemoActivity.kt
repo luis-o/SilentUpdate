@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.pmm.silentupdate.SilentUpdate
+import pt.mobilesword.silentupdate.SilentUpdate
 import com.pmm.ui.helper.RxSchedulers
 import io.reactivex.Observable
 import java.io.Serializable

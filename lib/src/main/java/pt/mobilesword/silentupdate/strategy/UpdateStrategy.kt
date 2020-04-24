@@ -1,4 +1,4 @@
-package com.pmm.silentupdate.strategy
+package pt.mobilesword.silentupdate.strategy
 
 import java.io.File
 
