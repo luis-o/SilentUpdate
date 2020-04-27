@@ -8,7 +8,6 @@ import android.os.Bundle
  * Activity statement cycle listener
  */
 internal abstract class ActivityLifeListener : Application.ActivityLifecycleCallbacks {
-
 	override fun onActivityStarted(activity: Activity?) {}
 	override fun onActivityResumed(activity: Activity?) {}
 	override fun onActivityPaused(activity: Activity?) {}

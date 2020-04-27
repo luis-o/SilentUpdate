@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-
-<!-- external-path: sd; path: the root directory of your application to save the file; name is freely defined -->
     <external-path
         name="external_storage_root"
         path="." />

@@ -209,7 +209,6 @@ private fun ContextWrapper?.showCustomInstallDialog(file: File) {
 	)
 }
 
-
 /**
 * Status: Flow
 * Display Dialog: prompt the user to download
@@ -274,6 +273,7 @@ internal fun Context.getAppName(): String? {
 	val pm: PackageManager = packageManager
 	try {
 		val info = pm.getApplicationInfo(this.packageName, 0)
+		this.loge("app name" + info.loadLabel(pm).toString())
 		return info.loadLabel(pm).toString()
 	} catch (e: PackageManager.NameNotFoundException) {
 		e.printStackTrace()

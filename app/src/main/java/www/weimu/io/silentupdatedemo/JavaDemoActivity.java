@@ -23,7 +23,6 @@ public class JavaDemoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_demo);
         checkPermission();
-
     }
 
     // Check permission step1
@@ -40,13 +39,12 @@ public class JavaDemoActivity extends AppCompatActivity {
                 });
     }
 
-
     // Get download link step2
     public void getLatestApk() {
         //Specific network request steps
         final String apkUrl = "https://github.com/luis-o/SilentUpdate/blob/master/deploy/sword.apk";
         //Determine the version number
-        final String latestVersion = "1.2.1";
+        final String latestVersion = "1.1.2";
         String currentVersion = BuildConfig.VERSION_NAME;
 
         //The latest version number field passed to you by the server to latestVersion

@@ -18,16 +18,16 @@ import java.io.File
 object SilentUpdate {
 
 	//The following data can be configured
-	var downLoadDialogShowAction: DialogShowAction? = null//Custom Download Dialog-> Flow Mode
-	var installDialogShowAction: DialogShowAction? = null//Custom Install Dialog-> Wireless mode, the file already exists
-	var intervalDay = 7//Interval popup reminder time-default reminder after 7 days-only applicable【isUseDefaultHint=true】
+	var downLoadDialogShowAction: DialogShowAction? = null //Custom Download Dialog-> Flow Mode
+	var installDialogShowAction: DialogShowAction? = null //Custom Install Dialog-> Wireless mode, the file already exists
+	var intervalDay = 7 //Interval popup reminder time-default reminder after 7 days-only applicable【isUseDefaultHint=true】
 
 	private val mobileUpdateStrategy by lazy { MobileUpdateStrategy() }
 	private val wifiUpdateStrategy by lazy { WifiUpdateStrategy() }
 
 	/**
 	 * Initialization of silent update
-      	 * @param App context
+     * @param App context
 	 */
 	fun init(context: Application) {
 		//Context initialization

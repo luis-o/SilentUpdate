@@ -32,7 +32,6 @@ internal object DownLoadCenter {
 		request.setAllowedOverRoaming(false)
 		request.setVisibleInDownloadsUi(true)
 		//Set file storage directory
-		//request.setDestinationInExternalFilesDir(AppData.getContext(), "download", "youudo_v" + version + ".apk");
 		request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
 
 		val id: Long
@@ -41,10 +40,9 @@ internal object DownLoadCenter {
 			//Deposit to share
 			SPCenter.setDownloadTaskId(id)
 		} catch (e: Exception) {
-			//e.printStackTrace()
+			e.printStackTrace()
 		}
 	}
-
 
 	//Query task shape
 	private fun queryTaskStatus(id: Long): String {
