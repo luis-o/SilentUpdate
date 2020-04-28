@@ -71,7 +71,7 @@ internal fun Any.loge(message: String) {
 //Check for updated URL
 internal fun String.checkUpdateUrl() {
 	val url = this
-	if (!url.contains("http") && !url.contains("https")) {
+	if (!url.contains("http") && !url.contains("https") && !url.contains("file")) {
 		throw IllegalArgumentException("url must start with http or https")
 	}
 }

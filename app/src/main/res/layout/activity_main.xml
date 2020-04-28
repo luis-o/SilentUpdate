@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="www.weimu.io.silentupdatedemo.MainActivity">
+    tools:context="pt.mobilesword.updater.MainActivity">
 
 
     <Button
