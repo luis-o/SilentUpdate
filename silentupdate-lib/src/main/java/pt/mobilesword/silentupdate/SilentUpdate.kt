@@ -137,7 +137,6 @@ object SilentUpdate {
 		return deleteFile(path)
 	}
 
-
 	/**
 	 * delete file or directory
 	 *

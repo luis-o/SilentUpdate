@@ -25,35 +25,30 @@ internal class WifiUpdateStrategy : UpdateStrategy {
 		e.printStackTrace()
 		return
 	}
-
-	val context = ContextCenter.getAppContext()
-	val activity = ContextCenter.getTopActivity()
-	val fileName = "${context.getAppName()}_v$latestVersion.apk"
-	val path = Const.UPDATE_FILE_DIR + fileName
-
+		val context = ContextCenter.getAppContext()
+		val activity = ContextCenter.getTopActivity()
+		val fileName = "${context.getAppName()}_v$latestVersion.apk"
+		val path = Const.UPDATE_FILE_DIR + fileName
 		val taskId = SPCenter.getDownloadTaskId()
-		loge("==============")
-		loge("taskID=$taskId")
-		if (File(path).isFileExist()) {
-			loge("【This file already exists】")
 
+		logd(" [taskID=$taskId】")
+		if (File(path).isFileExist()) {
+			logd("【This file already exists】")
 			if (DownLoadCenter.isDownTaskSuccess(taskId)) {
-				loge("The task has been downloaded")
-				// Status: complete
+				logd("【The task has been downloaded】")
 				activity.showInstallDialog(File(path)) //Pop up dialog
 			} else if (DownLoadCenter.isDownTaskPause(taskId)) {
-				loge("The task has been suspended")
-				//// Start download
-				loge("Continue download")
+				logd("【The task has been suspended】")
 				DownLoadCenter.addRequest(apkUrl, fileName, false)
+				logd("【Continue download】")
 			} else if (DownLoadCenter.isDownTaskProcessing(taskId)) {
-				loge("The task is being executed")
+				logd("【The task is being executed】")
 			} else {
-				loge("install download")
+				logd("【Install download】")
 				activity.showInstallDialog(File(path)) //Pop up dialog
 			}
 		} else {
-			loge("start download")
+			logd("【Start download】")
 			// There is no direct download
 			DownLoadCenter.addRequest(apkUrl, fileName)
 		}
