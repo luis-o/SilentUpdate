@@ -1,18 +1,13 @@
 package pt.mobilesword.updater;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import pt.mobilesword.silentupdate.SilentUpdate;
-import pt.mobilesword.silentupdate.core.UpdateInfo;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import pt.mobilesword.updater.R;
+
+import pt.mobilesword.silentupdate.SilentUpdate;
+import pt.mobilesword.silentupdate.core.UpdateInfo;
 
 public class JavaDemoActivity extends AppCompatActivity {
 
@@ -42,7 +37,7 @@ public class JavaDemoActivity extends AppCompatActivity {
                     updateInfo.setLatestVersion(latestVersion);
                     updateInfo.setTitle("This is a custom title");
                     updateInfo.setMsg("This is custom content");
-                    updateInfo.setForce(false);
+                    updateInfo.setForce(true);
                     updateInfo.setExtra(new Bundle());
                     return Unit.INSTANCE;
                 }

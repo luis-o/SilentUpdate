@@ -13,11 +13,10 @@ class AppData : OriginAppData() {
 
     override fun onCreate() {
         super.onCreate()
-	    // Initialize step01
+
         SilentUpdate.init(this)
 	    // Interval pop-up window reminding time-default reminder after 7 days
         SilentUpdate.intervalDay = 7
-        // Download reminder-> flow mode
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {
                 val dialog = AlertDialog.Builder(context)
@@ -48,8 +47,6 @@ class AppData : OriginAppData() {
                 dialog.show()
             }
         }
-
-        // Installation prompt-> wireless mode, the file already exists
 
         SilentUpdate.installDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {

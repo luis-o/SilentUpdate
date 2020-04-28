@@ -29,8 +29,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths"/>
         </provider>
-
-        <activity android:name=".KotlinDemoActivity" />
         <activity android:name=".JavaDemoActivity" />
     </application>
 
