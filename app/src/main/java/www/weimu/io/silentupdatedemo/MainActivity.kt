@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         btnKotlin.setOnClickListener {
             startActivity(Intent(this, KotlinDemoActivity::class.java))
         }
-        //java
+/*        //java
         btnJava.setOnClickListener {
             startActivity(Intent(this, JavaDemoActivity::class.java))
         }
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 toast("successfully deleted")
             else
                 toast("failed to delete")
-        }
+        }*/
     }
 
 

@@ -42,14 +42,16 @@ class KotlinDemoActivity : AppCompatActivity() {
         //Specific network request steps
         Observable.just(CheckVersionResultPO(
                 //apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
-                apkUrl = "https://github.com/luis-o/SilentUpdate/blob/master/deploy/sword.apk",
+                apkUrl = "https://github.com/luis-o/SilentUpdate/blob/master/deploy/sword_v1.1.2.apk",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())
                 .subscribe {
                     //Determine the version number
                     if (it.latestVersion > BuildConfig.VERSION_NAME) {
                         Toast.makeText(this@KotlinDemoActivity, "Starting download...", Toast.LENGTH_SHORT).show()
-                        Log.e("swordupdate", "downloading this ->" + it.apkUrl)
+                        Log.d("swordupdate", "downloading from here ->" + it.apkUrl)
+                        Log.d("swordupdate", "downloading this name->" + it.apkUrl)
+                        Log.d("swordupdate", "downloading this version->" + it.latestVersion)
                         SilentUpdate.update {
                             this.apkUrl = it.apkUrl
                             this.latestVersion = it.latestVersion
