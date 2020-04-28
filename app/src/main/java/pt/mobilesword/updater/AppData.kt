@@ -3,12 +3,12 @@ package pt.mobilesword.updater
 import android.app.AlertDialog
 import android.content.ContextWrapper
 import android.view.View
+import android.app.Application
+import kotlin.properties.Delegates
+
 import pt.mobilesword.silentupdate.SilentUpdate
 import pt.mobilesword.silentupdate.core.DialogShowAction
 import pt.mobilesword.silentupdate.core.UpdateInfo
-
-import android.app.Application
-import kotlin.properties.Delegates
 
 abstract class OriginAppData : Application() {
 
@@ -31,7 +31,6 @@ class AppData : OriginAppData() {
         super.onCreate()
 
         SilentUpdate.init(this)
-	    // Interval pop-up window reminding time-default reminder after 7 days
 
         SilentUpdate.intervalDay = 7
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
@@ -44,6 +43,7 @@ class AppData : OriginAppData() {
                         .setNegativeButton("Later", null)
                         .create()
                 dialog.setOnShowListener {
+
                     //positive
                     val posBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                     posBtn.setOnClickListener {
@@ -51,6 +51,7 @@ class AppData : OriginAppData() {
                         positiveClick()
                     }
                     val negBtn = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
                     //negative
                     if (updateInfo.isForce) {
                         negBtn.visibility = View.GONE
@@ -75,6 +76,7 @@ class AppData : OriginAppData() {
                         .setNegativeButton("Later", null)
                         .create()
                 dialog.setOnShowListener {
+
                     //positive
                     val posBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                     posBtn.setOnClickListener {
@@ -82,6 +84,7 @@ class AppData : OriginAppData() {
                         positiveClick()
                     }
                     val negBtn = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
                     //negative
                     if (updateInfo.isForce) {
                         negBtn.visibility = View.GONE

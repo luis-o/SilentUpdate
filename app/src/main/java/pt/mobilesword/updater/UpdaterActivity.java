@@ -8,7 +8,7 @@ import kotlin.jvm.functions.Function1;
 import pt.mobilesword.silentupdate.SilentUpdate;
 import pt.mobilesword.silentupdate.core.UpdateInfo;
 
-public class JavaDemoActivity extends AppCompatActivity {
+public class UpdaterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,18 +16,14 @@ public class JavaDemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_java_demo);
         getLatestApk();
     }
-
-    // Get download link step2
+    
     public void getLatestApk() {
-        //Specific network request steps
         final String apkUrl = "https://github.com/luis-o/SilentUpdate/raw/08e0a78695088a2439d7b0edbc77873aa94ef30e/app/build/outputs/apk/debug/app-debug.apk";
-        //Determine the version number
-        final String latestVersion = "1.1.2";
+        final String latestVersion = "0.0.1";  //The latest version number field passed by the server
+
         String currentVersion = BuildConfig.VERSION_NAME;
 
-        //The latest version number field passed to you by the server to latestVersion
         if (latestVersion.compareTo(currentVersion) > 0) {
-
             SilentUpdate.INSTANCE.update(new Function1<UpdateInfo, Unit>() {
                 @Override
                 public Unit invoke(UpdateInfo updateInfo) {

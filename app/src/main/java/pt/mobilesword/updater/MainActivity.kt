@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         btnJava.setOnClickListener {
             SilentUpdate.clearCache()
-            startActivity(Intent(this, JavaDemoActivity::class.java))
+            startActivity(Intent(this, UpdaterActivity::class.java))
         }
     }
 }
