@@ -16,7 +16,7 @@ internal class MobileUpdateStrategy : UpdateStrategy {
                 val activity = ContextCenter.getTopActivity()
                 activity.showInstallDialog(it)//Show installation popup
                 ContextCenter.getAppContext().openApkByFilePath(it)
-            }, 200)
+                }, 200)
         }
     }
 
