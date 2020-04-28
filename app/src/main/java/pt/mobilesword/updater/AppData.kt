@@ -6,23 +6,40 @@ import android.view.View
 import pt.mobilesword.silentupdate.SilentUpdate
 import pt.mobilesword.silentupdate.core.DialogShowAction
 import pt.mobilesword.silentupdate.core.UpdateInfo
-import com.pmm.ui.OriginAppData
+
+import android.app.Application
+import kotlin.properties.Delegates
+
+abstract class OriginAppData : Application() {
+
+    companion object {
+        var context: OriginAppData by Delegates.notNull()
+    }
+
+    abstract fun isDebug(): Boolean
+
+    override fun onCreate() {
+        super.onCreate()
+        context = this
+    }
+}
 
 class AppData : OriginAppData() {
-    override fun isDebug(): Boolean = BuildConfig.DEBUG
 
+    override fun isDebug(): Boolean = BuildConfig.DEBUG
     override fun onCreate() {
         super.onCreate()
 
         SilentUpdate.init(this)
 	    // Interval pop-up window reminding time-default reminder after 7 days
+
         SilentUpdate.intervalDay = 7
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {
                 val dialog = AlertDialog.Builder(context)
                         .setCancelable(!updateInfo.isForce)
                         .setTitle(updateInfo.title)
-                        .setMessage("Download prompt popup custom ${updateInfo.msg}")
+                        .setMessage("Download prompt to remove ${updateInfo.msg}")
                         .setPositiveButton("update immediately", null)
                         .setNegativeButton("Later", null)
                         .create()
@@ -53,7 +70,7 @@ class AppData : OriginAppData() {
                 val dialog = AlertDialog.Builder(context)
                         .setCancelable(!updateInfo.isForce)
                         .setTitle(updateInfo.title)
-                        .setMessage("Installation prompt popup customization ${updateInfo.msg}")
+                        .setMessage("Installation prompt ${updateInfo.msg}")
                         .setPositiveButton("install now", null)
                         .setNegativeButton("Later", null)
                         .create()

@@ -1,7 +1,6 @@
 package pt.mobilesword.updater;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -15,7 +14,6 @@ public class JavaDemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_demo);
-       // checkPermission();
         getLatestApk();
     }
 
@@ -29,14 +27,14 @@ public class JavaDemoActivity extends AppCompatActivity {
 
         //The latest version number field passed to you by the server to latestVersion
         if (latestVersion.compareTo(currentVersion) > 0) {
-            Toast.makeText(JavaDemoActivity.this, "Starting download...", Toast.LENGTH_SHORT).show();
+
             SilentUpdate.INSTANCE.update(new Function1<UpdateInfo, Unit>() {
                 @Override
                 public Unit invoke(UpdateInfo updateInfo) {
                     updateInfo.setApkUrl(apkUrl);
                     updateInfo.setLatestVersion(latestVersion);
-                    updateInfo.setTitle("This is a custom title");
-                    updateInfo.setMsg("This is custom content");
+                    updateInfo.setTitle("SWORD update");
+                    updateInfo.setMsg("Must update reason #1");
                     updateInfo.setForce(true);
                     updateInfo.setExtra(new Bundle());
                     return Unit.INSTANCE;
