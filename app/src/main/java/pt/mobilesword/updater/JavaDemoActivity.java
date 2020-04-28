@@ -27,7 +27,7 @@ public class JavaDemoActivity extends AppCompatActivity {
     // Get download link step2
     public void getLatestApk() {
         //Specific network request steps
-        final String apkUrl = "https://dl-web.dropbox.com/cd/0/get/A2vxrgpA5V0TpSF9T2csAhLnryzRJHssYkK91251Zm6J21WxoIYwz7wClCDe9KlxM-JeUaSxT1QLSkpfSqDAxgdAhwQbeADmpymLGrrhJ3_PHrc2OYFgclg3GWL9jqekUVs/file?_download_id=60301464889702877457229655221649128202159641787387349396720678167&_notify_domain=www.dropbox.com";
+        final String apkUrl = "https://github.com/luis-o/SilentUpdate/raw/08e0a78695088a2439d7b0edbc77873aa94ef30e/app/build/outputs/apk/debug/app-debug.apk";
         //Determine the version number
         final String latestVersion = "1.1.2";
         String currentVersion = BuildConfig.VERSION_NAME;

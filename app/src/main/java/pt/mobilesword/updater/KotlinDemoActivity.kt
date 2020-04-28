@@ -18,18 +18,6 @@ class KotlinDemoActivity : AppCompatActivity() {
         getLatestApk()
     }
 
-/*
-    // Check permission step1
-    private fun checkPermission() {
-        RxPermissions(this)
-                .request(Manifest.permission.READ_EXTERNAL_STORAGE,
-			 Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe { granted ->
-                    if (granted) getLatestApk()
-                }
-    }
-*/
-
     class CheckVersionResultPO(
             val apkUrl: String,
             val latestVersion: String
@@ -40,7 +28,7 @@ class KotlinDemoActivity : AppCompatActivity() {
         //Specific network request steps
         Observable.just(CheckVersionResultPO(
                 //Specific network request steps
-                apkUrl ="https://dl-web.dropbox.com/cd/0/get/A2vxrgpA5V0TpSF9T2csAhLnryzRJHssYkK91251Zm6J21WxoIYwz7wClCDe9KlxM-JeUaSxT1QLSkpfSqDAxgdAhwQbeADmpymLGrrhJ3_PHrc2OYFgclg3GWL9jqekUVs/file?_download_id=60301464889702877457229655221649128202159641787387349396720678167&_notify_domain=www.dropbox.com",
+                apkUrl ="https://github.com/luis-o/SilentUpdate/raw/08e0a78695088a2439d7b0edbc77873aa94ef30e/app/build/outputs/apk/debug/app-debug.apk",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())
                 .subscribe {
