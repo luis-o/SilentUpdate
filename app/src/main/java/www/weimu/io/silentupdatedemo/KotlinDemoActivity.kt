@@ -42,7 +42,7 @@ class KotlinDemoActivity : AppCompatActivity() {
         //Specific network request steps
         Observable.just(CheckVersionResultPO(
                 //apkUrl = "https://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk",
-                apkUrl = "https://github.com/luis-o/SilentUpdate/blob/master/deploy/sword_v1.1.2.apk",
+                apkUrl = "https://dl-web.dropbox.com/cd/0/get/A2vxrgpA5V0TpSF9T2csAhLnryzRJHssYkK91251Zm6J21WxoIYwz7wClCDe9KlxM-JeUaSxT1QLSkpfSqDAxgdAhwQbeADmpymLGrrhJ3_PHrc2OYFgclg3GWL9jqekUVs/file?_download_id=60301464889702877457229655221649128202159641787387349396720678167&_notify_domain=www.dropbox.com",
                 latestVersion = "1.1.2"
         )).compose(RxSchedulers.toMain())
                 .subscribe {

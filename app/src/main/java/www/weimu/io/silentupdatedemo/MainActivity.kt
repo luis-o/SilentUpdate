@@ -20,11 +20,15 @@ class MainActivity : AppCompatActivity() {
         btnJava.setOnClickListener {
             startActivity(Intent(this, JavaDemoActivity::class.java))
         }
+*/
         //clear cache
         btnClearCache.setOnClickListener {
             SilentUpdate.clearCache()
-            toast("Successfully cleared the cache")
+        //    toast("Successfully cleared the cache")
         }
+
+        /*
+
         //delete apk
         btnDeleteApk.setOnClickListener {
             if (SilentUpdate.deleteApk(version = "1.1.1"))
