@@ -29,9 +29,7 @@ class AppData : OriginAppData() {
     override fun isDebug(): Boolean = BuildConfig.DEBUG
     override fun onCreate() {
         super.onCreate()
-
         SilentUpdate.init(this)
-
         SilentUpdate.intervalDay = 7
         SilentUpdate.downLoadDialogShowAction = object : DialogShowAction {
             override fun show(context: ContextWrapper, updateInfo: UpdateInfo, positiveClick: () -> Unit, negativeClick: () -> Unit) {
