@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 adb shell am start -n www.weimu.io.silentupdatedemo/.MainActivity
+=======
+#adb shell am start -n www.weimu.io.silentupdatedemo/.MainActivity
+adb shell am start -n pt.mobilesword.updater/.MainActivity
+>>>>>>> f29e7a78e552ef0f570ed7871e128fd6038e879b
 

@@ -6,29 +6,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="www.weimu.io.silentupdatedemo.MainActivity">
+    tools:context="pt.mobilesword.updater.MainActivity">
 
 
-    <Button
-        android:id="@+id/btnKotlin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kotlin" />
     <Button
         android:id="@+id/btnJava"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Java" />
+        android:text="@string/module_silentupdate_update" />
 
-    <Button
-        android:id="@+id/btnClearCache"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clear cache" />
-
-    <Button
-        android:id="@+id/btnDeleteApk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete apk" />
 </LinearLayout>
