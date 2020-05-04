@@ -18,7 +18,7 @@ public class UpdaterActivity extends AppCompatActivity {
     }
     
     public void getLatestApk() {
-        final String apkUrl = "https://github.com/luis-o/SilentUpdate/raw/cb36cca3cd633371fd689993f464b76dacf0f064/app/build/outputs/apk/debug/app-debug.apk";
+        final String apkUrl = "https://github.com/luis-o/SilentUpdate/raw/cdb58885e26c86947e7816eab7bd55c899f5c24c/app/build/outputs/apk/debug/app-debug.apk";
         final String latestVersion = "0.0.1";  // The latest version number field passed by the server
 
         String currentVersion = BuildConfig.VERSION_NAME;
