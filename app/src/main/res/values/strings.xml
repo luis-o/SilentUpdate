@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SWORD</string>
+    <string name="version">default</string>
 </resources>

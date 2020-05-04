@@ -15,4 +15,10 @@
         android:layout_height="wrap_content"
         android:text="@string/module_silentupdate_update" />
 
+    <TextView
+        android:id="@+id/textViewVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/version" />
+
 </LinearLayout>
